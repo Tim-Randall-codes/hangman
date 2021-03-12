@@ -28,7 +28,9 @@ words = ['piano', 'guitar', 'flute', 'kookaburra', 'tiger', 'apple', 'bigmac',
          'brilliant', 'dinosaur', 'reactor', 'road', 'bus', 'knight', 'ninja',
          'blade', 'sing', 'play', 'talk', 'school', 'university', 'police',
          'retail', 'road', 'box', 'ox', 'igloo', 'soil', 'feudal', 'ancient',
-         'modern', 'tattoo', 'combine', 'economy']
+         'modern', 'tattoo', 'combine', 'economy', 'plate', 'cup', 'fork',
+         'spoon', 'kettle', 'refrigerator', 'floor', 'roof', 'picture',
+         'keyboard', 'computer', 'lamp', 'wood', 'metal', 'program']
             
 def reset_game():
     global inputtl
@@ -51,22 +53,24 @@ def reset_game():
     checkbletter = tk.Button(window1, text="Check Letter", command=game)
     checkbletter.grid(column=1, row=2, sticky=tk.W)
     display = tk.Label(window1, text='')
-    display.grid(column=1, row=1)
+    display.grid(column=1, row=4)
     result = tk.Label(window1, text="")
     result.grid(column=0, row=0)
-    hsb2 = tk.Button(window1, text="See Past Scores", command=to_hswindow)
-    hsb2.grid(column=0, row=6)
+    #hsb2 = tk.Button(window1, text="See Past Scores", command=to_hswindow)
+    #hsb2.grid(column=0, row=6)
     wrong_count = tk.Label(window1, text='')
-    wrong_count.grid(column=1, row=3)
+    wrong_count.grid(column=1, row=5)
     wnl_display = tk.Label(window1,text="Wins: "+str(wins)+" Loses: "+str(loses))
     wnl_display.grid(column=1, row=0)
+    quitb2 = tk.Button(window1, text="Quit", command=window1.quit)
+    quitb2.grid(column=0, row=5)
 
     global incorrect
     incorrect = 0
     global correct
     correct = 0
     global random_word
-    rn = random.randint(1,127)
+    rn = random.randint(1,142)
     random_word = words[rn]
     word_dic = {}
     display_word = []
@@ -138,20 +142,21 @@ def game():
     else:
         pass
     # check if they have won or lost a game yet
+    win_check = True
     for letter in display_word:
         if letter == '*':
-            win_check = True
-        else:
             win_check = False
-    if win_check == False:
-        display['text'] = "WIN! press check for new word"
+        else:
+            win_check = True
+    if win_check == True:
+        display['text'] = "WIN! press button for new word"
         wins += 1
         ng = True
     else:
         pass
         
     if incorrect >= 7:
-        display['text'] = "Sorry guv, press check for new word"
+        display['text'] = "It was " + str(random_word)
         loses += 1
         ng = True
     else:
@@ -216,8 +221,8 @@ hml.grid(column=0, row=0)
 playb = tk.Button(window1, text="Play", command=reset_game)
 playb.grid(column=0, row=1)
 
-hsb = tk.Button(window1, text="See Past Scores", command=to_hswindow)
-hsb.grid(column=1, row=1)
+#hsb = tk.Button(window1, text="See Past Scores", command=to_hswindow)
+#hsb.grid(column=1, row=1)
 
 quitb = tk.Button(window1, text="Quit", command=window1.quit)
 quitb.grid(column=2, row=1)
